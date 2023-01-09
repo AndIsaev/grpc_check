@@ -1,17 +1,24 @@
+from dataclasses import asdict
+
 import grpc
-from server import main_pb2
-from server import main_pb2_grpc
+
+from client.fake_data import USERS
+from permission_service import server_pb2
+from permission_service import server_pb2_grpc
+
+
+def get_permission(stub):
+
+    for user in USERS:
+        response = stub.GetPermission(server_pb2.PermissionRequest(user=asdict(user)))
+        print(response)
 
 
 def run():
-    # NOTE(gRPC Python Team): .close() is possible on a channel and should be
-    # used in circumstances in which the with statement does not fit the needs
-    # of the code.
-    print("Will try to greet world ...")
+    print("Trying to get permissions ...")
     with grpc.insecure_channel('localhost:50051') as channel:
-        stub = main_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(main_pb2.HelloRequest(name='Andy'))
-    print("Greeter client received: " + response.message)
+        stub = server_pb2_grpc.PermissionStub(channel)
+        get_permission(stub)
 
 
 if __name__ == '__main__':
