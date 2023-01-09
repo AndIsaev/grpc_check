@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.tutorial";
+option java_outer_classname = "TutorialProto";
+option objc_class_prefix = "TUT";
+
+package tutorial;
+
+// The greeting service definition.
+service Permission {
+  // Sends a greeting
+  rpc GetPermission (PermissionRequest) returns (PermissionResponse) {}
+}
+
+
+// The request message containing the user's name.
+message User {
+  enum Role {
+    ADMIN = 0;
+    MANAGER = 1;
+    USER = 2;
+  }
+
+  required int32 id = 1;
+  required string name = 2;
+  required Role role = 3 [default = USER];
+}
+
+
+message PermissionRequest {
+  required User user = 1;
+}
+
+
+
+message PermissionBody {
+  // the model of answer for clients
+  required int32 id = 1;
+  required string name = 2;
+  required bool result = 3;
+}
+
+// The response message containing the greetings
+message PermissionResponse {
+  required PermissionBody response = 1;
+}
