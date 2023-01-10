@@ -2,9 +2,9 @@ from dataclasses import asdict
 
 import grpc
 
-from client.fake_data import USERS
-from permission_service import server_pb2
-from permission_service import server_pb2_grpc
+from fake_data import USERS
+import server_pb2
+import server_pb2_grpc
 
 
 def get_permission(stub):
@@ -14,12 +14,12 @@ def get_permission(stub):
         print(response)
 
 
-def run():
+def run_client():
     print("Trying to get permissions ...")
-    with grpc.insecure_channel('localhost:50051') as channel:
+    with grpc.insecure_channel('permission_service:50051') as channel:
         stub = server_pb2_grpc.PermissionStub(channel)
         get_permission(stub)
 
 
 if __name__ == '__main__':
-    run()
+    run_client()

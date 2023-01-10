@@ -1,4 +1,4 @@
-from client.models import UserRole, User
+from models import UserRole, User
 
 USERS = (
     User(id=1, name='Andy', role=UserRole.admin.value),
