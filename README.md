@@ -3,7 +3,7 @@
 ### run server:
 
 ``````
-python3 simple_server.py
+docker-compose up --build
 ``````
 
 ### generate protofiles:
