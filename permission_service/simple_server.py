@@ -22,7 +22,7 @@ class Permission(server_pb2_grpc.PermissionServicer):
         return server_pb2.PermissionResponse(response=body)
 
 
-def serve():
+def run_server():
     port = '50051'
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     server_pb2_grpc.add_PermissionServicer_to_server(Permission(), server)
@@ -34,4 +34,4 @@ def serve():
 
 if __name__ == '__main__':
     logging.basicConfig()
-    serve()
+    run_server()
