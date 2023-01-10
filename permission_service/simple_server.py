@@ -8,7 +8,7 @@ import server_pb2_grpc
 
 class Permission(server_pb2_grpc.PermissionServicer):
 
-    def GetPermission(self, request, context):
+    def SendPermission(self, request, context):
         permission = False
         if request.user.role == server_pb2.User.Role.ADMIN:
             permission = True

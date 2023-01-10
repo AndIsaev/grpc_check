@@ -6,7 +6,7 @@ import server_pb2 as server__pb2
 
 
 class PermissionStub(object):
-    """The greeting service definition.
+    """The permission service.
     """
 
     def __init__(self, channel):
@@ -15,19 +15,19 @@ class PermissionStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetPermission = channel.unary_unary(
-                '/tutorial.Permission/GetPermission',
+        self.SendPermission = channel.unary_unary(
+                '/tutorial.Permission/SendPermission',
                 request_serializer=server__pb2.PermissionRequest.SerializeToString,
                 response_deserializer=server__pb2.PermissionResponse.FromString,
                 )
 
 
 class PermissionServicer(object):
-    """The greeting service definition.
+    """The permission service.
     """
 
-    def GetPermission(self, request, context):
-        """Sends a greeting
+    def SendPermission(self, request, context):
+        """schema rout
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -36,8 +36,8 @@ class PermissionServicer(object):
 
 def add_PermissionServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetPermission': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPermission,
+            'SendPermission': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendPermission,
                     request_deserializer=server__pb2.PermissionRequest.FromString,
                     response_serializer=server__pb2.PermissionResponse.SerializeToString,
             ),
@@ -49,11 +49,11 @@ def add_PermissionServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Permission(object):
-    """The greeting service definition.
+    """The permission service.
     """
 
     @staticmethod
-    def GetPermission(request,
+    def SendPermission(request,
             target,
             options=(),
             channel_credentials=None,
@@ -63,7 +63,7 @@ class Permission(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tutorial.Permission/GetPermission',
+        return grpc.experimental.unary_unary(request, target, '/tutorial.Permission/SendPermission',
             server__pb2.PermissionRequest.SerializeToString,
             server__pb2.PermissionResponse.FromString,
             options, channel_credentials,

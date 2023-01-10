@@ -10,7 +10,7 @@ import server_pb2_grpc
 def get_permission(stub):
 
     for user in USERS:
-        response = stub.GetPermission(server_pb2.PermissionRequest(user=asdict(user)))
+        response = stub.SendPermission(server_pb2.PermissionRequest(user=asdict(user)))
         print(response)
 
 

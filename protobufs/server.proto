@@ -7,15 +7,16 @@ option objc_class_prefix = "TUT";
 
 package tutorial;
 
-// The greeting service definition.
+// The permission service.
 service Permission {
-  // Sends a greeting
-  rpc GetPermission (PermissionRequest) returns (PermissionResponse) {}
+  // schema rout
+  rpc SendPermission (PermissionRequest) returns (PermissionResponse) {}
 }
 
 
 // The request message containing the user's name.
 message User {
+
   enum Role {
     ADMIN = 0;
     MANAGER = 1;
