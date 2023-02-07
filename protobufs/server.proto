@@ -13,6 +13,10 @@ service Permission {
   rpc SendPermission (PermissionRequest) returns (PermissionResponse) {}
 }
 
+service Status {
+    rpc SendStatus (StatusRequest) returns (StatusResponse) {}
+}
+
 
 // The request message containing the user's name.
 message User {
@@ -45,4 +49,18 @@ message PermissionBody {
 // The response message containing the greetings
 message PermissionResponse {
   required PermissionBody response = 1;
+}
+
+
+message StatusRequest {
+  required string status = 1;
+}
+
+message SuccessStatusBoby {
+  required string text_response = 1;
+  required int32 int_response = 2;
+}
+
+message StatusResponse {
+    required SuccessStatusBoby response = 1;
 }

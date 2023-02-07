@@ -22,10 +22,24 @@ class Permission(server_pb2_grpc.PermissionServicer):
         return server_pb2.PermissionResponse(response=body)
 
 
+class Status(server_pb2_grpc.StatusServicer):
+
+    def SendStatus(self, request, context):
+
+        text_answer = 'Success'
+        int_response = 200
+        body = server_pb2.SuccessStatusBoby(
+            text_response=text_answer,
+            int_response=int_response
+        )
+        return server_pb2.StatusResponse(response=body)
+
+
 def run_server():
     port = '50051'
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     server_pb2_grpc.add_PermissionServicer_to_server(Permission(), server)
+    server_pb2_grpc.add_StatusServicer_to_server(Status(), server)
     server.add_insecure_port('[::]:' + port)
     server.start()
     print("Server started, listening on " + port)

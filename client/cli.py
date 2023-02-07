@@ -14,11 +14,17 @@ def get_permission(stub):
         print(response)
 
 
+def get_status(stub):
+    print(stub.SendStatus(server_pb2.StatusRequest(status='200')))
+
+
 def run_client():
     print("Trying to get permissions ...")
     with grpc.insecure_channel('permission_service:50051') as channel:
-        stub = server_pb2_grpc.PermissionStub(channel)
-        get_permission(stub)
+        permission_stub = server_pb2_grpc.PermissionStub(channel)
+        status_stub = server_pb2_grpc.StatusStub(channel)
+        get_permission(permission_stub)
+        get_status(status_stub)
 
 
 if __name__ == '__main__':
